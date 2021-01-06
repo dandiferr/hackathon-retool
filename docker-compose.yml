@@ -11,11 +11,6 @@ services:
       - DB_CONNECTOR_PORT=3002
       - DB_SSH_CONNECTOR_HOST=http://db-ssh-connector
       - DB_SSH_CONNECTOR_PORT=3002
-    networks:
-      - frontend-network
-      - backend-network
-      - db-connector-network
-      - db-ssh-connector-network
     depends_on:
       - postgres
       - db-connector
@@ -24,7 +19,7 @@ services:
     links:
       - postgres
     ports:
-      - '3000:3000'
+      - '10.0.2.102:7777:3000'
     volumes:
       - ./keys:/root/.ssh
       - ssh:/retool_backend/autogen_ssh_keys
@@ -36,8 +31,6 @@ services:
     env_file: ./docker.env
     environment:
       - SERVICE_TYPE=JOBS_RUNNER
-    networks:
-      - backend-network
     depends_on:
       - postgres
     command: bash -c "chmod -R +x ./docker_scripts; sync; ./docker_scripts/wait-for-it.sh postgres:5432; ./docker_scripts/start_api.sh"
@@ -52,8 +45,6 @@ services:
     env_file: ./docker.env
     environment:
       - SERVICE_TYPE=DB_CONNECTOR_SERVICE
-    networks:
-      - db-connector-network
     restart: on-failure
 
   db-ssh-connector:
@@ -64,8 +55,6 @@ services:
     env_file: ./docker.env
     environment:
       - SERVICE_TYPE=DB_SSH_CONNECTOR_SERVICE
-    networks:
-      - db-ssh-connector-network
     volumes:
       - ssh:/retool_backend/autogen_ssh_keys
       - ./keys:/retool_backend/keys
@@ -74,40 +63,36 @@ services:
   postgres:
     image: 'postgres:9.6.5'
     env_file: docker.env
-    networks:
-      - backend-network
-      - db-connector-network
     volumes:
       - data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=hammerhead_production
+      - POSTGRES_USER=retool_internal_user
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_PASSWORD=randomstring
 
   # Uncomment this if you do not need a database for storing custom data (e.g. CSVs)
-  user-postgres:
-    image: 'postgres:9.6.5'
-    env_file: ./userData/userData.env
-    networks:
-      - db-connector-network
-    volumes:
-      - user-data:/var/lib/postgresql/data
+#  user-postgres:
+#    image: 'postgres:9.6.5'
+#    env_file: ./userData/userData.env
+#    volumes:
+#      - user-data:/var/lib/postgresql/data
 
   # Uncomment below to use nginx container to handle the frontend & SSL certification
-  https-portal:
-    image: tryretool/https-portal:latest
-    ports:
-      - '80:80'
-      - '443:443'
-    links:
-      - api
-    restart: always
-    env_file: ./docker.env
-    environment:
-      STAGE: 'local' # <- Change 'local' to 'production' to use a LetsEncrypt signed SSL cert
-    networks:
-      - frontend-network
-networks:
-  frontend-network:
-  backend-network:
-  db-connector-network:
-  db-ssh-connector-network:
+#  https-portal:
+#    image: tryretool/https-portal:latest
+#    ports:
+#      - '7777:80'
+#      - '7443:443'
+#    links:
+#      - api
+#    restart: always
+#    env_file: ./docker.env
+#    environment:
+#      STAGE: 'local' # <- Change 'local' to 'production' to use a LetsEncrypt signed SSL cert
 
 volumes:
   ssh:
