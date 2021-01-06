@@ -2,7 +2,7 @@ version: '2'
 services:
   api:
     build:
-      context: ./
+      context: ./retool
       dockerfile: Dockerfile
     env_file: ./docker.env
     environment:
@@ -19,14 +19,14 @@ services:
     links:
       - postgres
     ports:
-      - '10.0.2.102:7777:3000'
+      - '3000:3000'
     volumes:
       - ./keys:/root/.ssh
       - ssh:/retool_backend/autogen_ssh_keys
 
   jobs-runner:
     build:
-      context: ./
+      context: ./retool
       dockerfile: Dockerfile
     env_file: ./docker.env
     environment:
@@ -39,7 +39,7 @@ services:
 
   db-connector:
     build:
-      context: ./
+      context: ./retool
       dockerfile: Dockerfile
     command: bash -c "./retool_backend"
     env_file: ./docker.env
@@ -49,7 +49,7 @@ services:
 
   db-ssh-connector:
     build:
-      context: ./
+      context: ./retool
       dockerfile: Dockerfile
     command: bash -c "./docker_scripts/generate_key_pair.sh; ./retool_backend"
     env_file: ./docker.env
@@ -74,27 +74,6 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_PASSWORD=randomstring
 
-  # Uncomment this if you do not need a database for storing custom data (e.g. CSVs)
-#  user-postgres:
-#    image: 'postgres:9.6.5'
-#    env_file: ./userData/userData.env
-#    volumes:
-#      - user-data:/var/lib/postgresql/data
-
-  # Uncomment below to use nginx container to handle the frontend & SSL certification
-#  https-portal:
-#    image: tryretool/https-portal:latest
-#    ports:
-#      - '7777:80'
-#      - '7443:443'
-#    links:
-#      - api
-#    restart: always
-#    env_file: ./docker.env
-#    environment:
-#      STAGE: 'local' # <- Change 'local' to 'production' to use a LetsEncrypt signed SSL cert
-
 volumes:
   ssh:
   data:
-  user-data:
