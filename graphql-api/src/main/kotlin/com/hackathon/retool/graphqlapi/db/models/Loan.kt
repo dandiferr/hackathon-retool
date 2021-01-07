@@ -1,5 +1,6 @@
 package com.hackathon.retool.graphqlapi.db.models
 
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
@@ -16,4 +17,6 @@ class Loan {
     var total_remaining: Float? = null
     var purchase_total: Float? = null
     var monthly_amount: Float? = null
+    @Column(name="user_id")
+    var userId: Int = -1
 }

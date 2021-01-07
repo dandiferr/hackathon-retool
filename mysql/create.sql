@@ -20,6 +20,7 @@ CREATE FULLTEXT INDEX `idx_users_phone` ON `users` (`phone`);
 
 CREATE TABLE IF NOT EXISTS `loans` (
   id INT auto_increment PRIMARY KEY,
+  user_id INT NOT NULL,
   ari VARCHAR(255) NOT NULL,
   apr DECIMAL(5,2) NOT NULL,
   autopay BOOLEAN NOT NULL,
@@ -31,3 +32,4 @@ CREATE TABLE IF NOT EXISTS `loans` (
 ) ENGINE=INNODB;
 
 CREATE FULLTEXT INDEX `idx_loans_ari` ON `loans` (`ari`);
+CREATE INDEX `idx_loans_user_id` ON `loans` (`user_id`);

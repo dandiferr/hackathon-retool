@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface LoansRepository : CrudRepository<Loan, Int> {
     fun findByAri(ari: String) : Loan?
+    fun findByUserId(userId: Int) : Iterable<Loan>
 }

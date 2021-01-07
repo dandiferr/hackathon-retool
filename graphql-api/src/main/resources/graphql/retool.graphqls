@@ -1,9 +1,10 @@
 type Query {
     # The API Version
     version: String!
-    users(id: Int): User
-    search(query: String): User
-    loans(id: Int): Loan
+    getUserById(id: Int): User
+    searchUsers(query: String): User
+    getLoanById(id: Int): Loan
+    getLoansByAri(ari: String): Loan
 }
 
 type User {
@@ -14,6 +15,7 @@ type User {
     email: String!
     phone: String!
     status: String!
+    loans: [Loan]
 }
 
 type Loan {
@@ -25,4 +27,5 @@ type Loan {
 	total_remaining: Float!
 	purchase_total: Float!
 	monthly_amount: Float!
+	user: User!
 }

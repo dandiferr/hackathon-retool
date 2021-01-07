@@ -1,18 +1,14 @@
 package com.hackathon.retool.graphqlapi.resolvers
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver
+import com.coxautodev.graphql.tools.GraphQLResolver
+import com.hackathon.retool.graphqlapi.db.models.Loan
 import com.hackathon.retool.graphqlapi.db.models.User
-import com.hackathon.retool.graphqlapi.db.repository.UsersRepository
-import org.springframework.beans.factory.annotation.Autowired
+import com.hackathon.retool.graphqlapi.db.repository.LoansRepository
 import org.springframework.stereotype.Component
 
 @Component
-class UserResolver @Autowired constructor(val repository: UsersRepository) : GraphQLQueryResolver {
-    fun users(id: Int) : User? {
-        return repository.findById(id).orElse(null)
-    }
-
-    fun search(query: String) : User? {
-        return repository.findByAriOrEmailOrPhone(query, query, query)
+class UserResolver(var loansRepository: LoansRepository) : GraphQLResolver<User> {
+    fun loans(user: User) : List<Loan>? {
+        return loansRepository.findByUserId(user.id).toList()
     }
 }
