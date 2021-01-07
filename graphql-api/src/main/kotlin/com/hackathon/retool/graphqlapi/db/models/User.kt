@@ -6,11 +6,12 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "users")
-class User (
-    @Id var id: Int,
-    var ari: String,
-    var firstName: String,
-    var lastName: String,
-    var email: String,
-    var phone: String
-)
+class User {
+    @Id var id: Int = -1
+    var ari: String = ""
+    var first_name: String = ""
+    var last_name: String = ""
+    var email: String = ""
+    var phone: String = ""
+    var status: String = ""
+}
