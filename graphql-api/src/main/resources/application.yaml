@@ -13,6 +13,10 @@ graphiql:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:32768/retool_demo?useSSL=false
+    url: jdbc:mysql://mysql:3306/retool_demo?useSSL=false
     username: root
     password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
