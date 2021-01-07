@@ -1,15 +1,11 @@
-FROM amazoncorretto:11 as build
-WORKDIR /Bld
+FROM amazoncorretto:11
 
 COPY ./gradlew .
 COPY ./gradle gradle/
+COPY ./settings.gradle.kts .
 COPY ./build.gradle.kts .
 COPY ./src/ src/
 
 RUN ./gradlew build
 
-FROM amazoncorretto:11 as runtime
-WORKDIR /App
-COPY --from=build /Bld/build/libs/*.jar app.jar
-
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "build/libs/graphql-api.jar"]
