@@ -18,6 +18,7 @@ services:
     command: bash -c "./docker_scripts/wait-for-it.sh postgres:5432; ./docker_scripts/start_api.sh"
     links:
       - postgres
+      - mysql
     ports:
       - '10.0.2.102:7777:3000'
     volumes:
@@ -60,6 +61,13 @@ services:
       - ./keys:/retool_backend/keys
     restart: on-failure
 
+  mysql:
+    image: 'mysql:5.7.32'
+    ports:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
   postgres:
     image: 'postgres:9.6.5'
     env_file: docker.env
@@ -75,5 +83,6 @@ services:
       - POSTGRES_PASSWORD=randomstring
 
 volumes:
+  aff:
   ssh:
   data:
