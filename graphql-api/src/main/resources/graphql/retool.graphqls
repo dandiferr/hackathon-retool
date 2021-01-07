@@ -1,7 +1,9 @@
 type Query {
     # The API Version
     version: String!
-    users(id:Int): User
+    users(id: Int): User
+    search(query: String): User
+    loans(id: Int): Loan
 }
 
 type User {
@@ -12,4 +14,15 @@ type User {
     email: String!
     phone: String!
     status: String!
+}
+
+type Loan {
+    id: Int!
+    ari: String!
+	autopay: Boolean!
+	merchant: String!
+	total_paid: Float!
+	total_remaining: Float!
+	purchase_total: Float!
+	monthly_amount: Float!
 }
