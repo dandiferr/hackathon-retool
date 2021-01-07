@@ -2,9 +2,9 @@ type Query {
     # The API Version
     version: String!
     getUserById(id: Int): User
-    searchUsers(query: String): User
+    searchUsers(query: String): [User]
     getLoanById(id: Int): Loan
-    getLoansByAri(ari: String): Loan
+    getLoanByAri(ari: String): Loan
 }
 
 type User {

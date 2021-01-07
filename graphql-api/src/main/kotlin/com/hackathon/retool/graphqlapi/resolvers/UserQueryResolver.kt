@@ -13,7 +13,7 @@ class UserQueryResolver @Autowired constructor(val repository: UsersRepository) 
         return repository.findById(id).orElse(null)
     }
 
-    fun searchUsers(query: String) : User? {
-        return repository.findByAriOrEmailOrPhone(query, query, query)
+    fun searchUsers(query: String) : List<User>? {
+        return repository.findByAriOrEmailOrPhone(query, query, query).toList()
     }
 }

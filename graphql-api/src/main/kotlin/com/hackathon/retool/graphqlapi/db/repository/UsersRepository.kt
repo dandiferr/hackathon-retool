@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UsersRepository : CrudRepository<User, Int> {
-    fun findByAriOrEmailOrPhone(ari: String, email: String, phone: String) : User?
+    fun findByAriOrEmailOrPhone(ari: String, email: String, phone: String) : Iterable<User>
 }

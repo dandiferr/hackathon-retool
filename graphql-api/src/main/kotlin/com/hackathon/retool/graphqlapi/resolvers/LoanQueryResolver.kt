@@ -14,7 +14,7 @@ class LoanQueryResolver @Autowired constructor(val repository: LoansRepository) 
         return repository.findById(id).orElse(null)
     }
 
-    fun getLoansByAri(ari: String) : Loan? {
+    fun getLoanByAri(ari: String) : Loan? {
         return repository.findByAri(ari)
     }
 }
