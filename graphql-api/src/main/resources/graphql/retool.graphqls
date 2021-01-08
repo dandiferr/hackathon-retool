@@ -1,31 +1,21 @@
 type Query {
     # The API Version
     version: String!
-    getUserById(id: Int): User
-    searchUsers(query: String): [User]
-    getLoanById(id: Int): Loan
-    getLoanByAri(ari: String): Loan
+    getMerchantById(id: Int): Merchant
+    getMerchantByAri(ari: String): Merchant
+    searchMerchants(query: String): [Merchant]
 }
 
-type User {
-    id: Int!
+type Merchant {
     ari: String!
-    first_name: String!
-    last_name: String!
-    email: String!
-    phone: String!
-    status: String!
-    loans: [Loan]
-}
-
-type Loan {
-    id: Int!
-    ari: String!
-	autopay: Boolean!
-	merchant: String!
-	total_paid: Float!
-	total_remaining: Float!
-	purchase_total: Float!
-	monthly_amount: Float!
-	user: User!
+    merchantName: String!
+    website: String!
+    affirmTxnFee: String!
+    integrationType: String!
+    adminName: String!
+    adminEmail: String!
+    adminPhone: String!
+    fraudName: String!
+    fraudEmail: String!
+    fraudPhone: String!
 }

@@ -2,34 +2,21 @@ CREATE DATABASE IF NOT EXISTS `retool_demo`;
 
 USE `retool_demo`;
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `merchants` (
   id INT auto_increment PRIMARY KEY,
   ari VARCHAR(255) NOT NULL,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  phone VARCHAR(64) NOT NULL,
-  status VARCHAR(16) NOT NULL
+  merchant_name VARCHAR(255) NOT NULL,
+  website VARCHAR(255) NOT NULL,
+  affirm_txn_fee DECIMAL(6,2) NOT NULL,
+  integration_type VARCHAR(255) NOT NULL,
+  admin_name VARCHAR(255) NOT NULL,
+  admin_email VARCHAR(255) NOT NULL,
+  admin_phone VARCHAR(64) NOT NULL,
+  fraud_name VARCHAR(255) NOT NULL,
+  fraud_email VARCHAR(255) NOT NULL,
+  fraud_phone VARCHAR(64) NOT NULL
 ) ENGINE=INNODB;
 
-CREATE FULLTEXT INDEX `idx_users_ari` ON `users` (`ari`);
-CREATE FULLTEXT INDEX `idx_users_first_name` ON `users` (`first_name`);
-CREATE FULLTEXT INDEX `idx_users_last_name` ON `users` (`last_name`);
-CREATE FULLTEXT INDEX `idx_users_email` ON `users` (`email`);
-CREATE FULLTEXT INDEX `idx_users_phone` ON `users` (`phone`);
-
-CREATE TABLE IF NOT EXISTS `loans` (
-  id INT auto_increment PRIMARY KEY,
-  user_id INT NOT NULL,
-  ari VARCHAR(255) NOT NULL,
-  apr DECIMAL(5,2) NOT NULL,
-  autopay BOOLEAN NOT NULL,
-  merchant VARCHAR(255) NOT NULL,
-  total_paid DECIMAL(6,2) NOT NULL,
-  total_remaining DECIMAL(6,2) NOT NULL,
-  purchase_total DECIMAL(6,2) NOT NULL,
-  monthly_amount DECIMAL(6,2) NOT NULL
-) ENGINE=INNODB;
-
-CREATE FULLTEXT INDEX `idx_loans_ari` ON `loans` (`ari`);
-CREATE INDEX `idx_loans_user_id` ON `loans` (`user_id`);
+CREATE FULLTEXT INDEX `idx_merchants_ari` ON `merchants` (`ari`);
+CREATE FULLTEXT INDEX `idx_merchants_merchant_name` ON `merchants` (`merchant_name`);
+CREATE FULLTEXT INDEX `idx_merchants_website` ON `merchants` (`website`);
