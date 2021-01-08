@@ -75,6 +75,8 @@ services:
       - 3306
     environment:
       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - data:/var/lib/mysql/data
 
   postgres:
     image: 'postgres:9.6.5'

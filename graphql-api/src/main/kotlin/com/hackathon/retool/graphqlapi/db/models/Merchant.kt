@@ -2,19 +2,21 @@ package com.hackathon.retool.graphqlapi.db.models
 
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
 @Table(name = "merchants")
 class Merchant {
-    @Id var id: Int = -1
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int = -1
     var ari: String = ""
     @Column(name="merchant_name")
     var merchantName: String? = ""
     var website: String? = ""
     @Column(name="affirm_txn_fee")
-    var affirmTxnFee: String? = ""
+    var affirmTxnFee: Double? = 0.00
     @Column(name="integration_type")
     var integrationType: String? = ""
     @Column(name="admin_name")

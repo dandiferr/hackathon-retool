@@ -12,6 +12,10 @@ class MerchantQueryResolver @Autowired constructor(val repository: MerchantsRepo
         return repository.findById(id).orElse(null)
     }
 
+    fun getMerchants() : List<Merchant>? {
+        return repository.findAll().toList()
+    }
+
     fun getMerchantByAri(ari: String) : Merchant? {
         return repository.findByAri(ari)
     }

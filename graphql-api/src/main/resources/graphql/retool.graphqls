@@ -1,12 +1,14 @@
 type Query {
     # The API Version
     version: String!
+    getMerchants: [Merchant]
     getMerchantById(id: Int): Merchant
     getMerchantByAri(ari: String): Merchant
     searchMerchants(query: String): [Merchant]
 }
 
 type Merchant {
+    id: Int!
     ari: String!
     merchantName: String!
     website: String!
@@ -18,4 +20,8 @@ type Merchant {
     fraudName: String!
     fraudEmail: String!
     fraudPhone: String!
+}
+
+type Mutation {
+    createMerchant: Merchant
 }
