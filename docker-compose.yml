@@ -20,7 +20,7 @@ services:
       - postgres
       - graphql-api
     ports:
-      - '10.0.2.102:7777:3000'
+      - '7777:3000'
     volumes:
       - ./keys:/root/.ssh
       - ssh:/retool_backend/autogen_ssh_keys

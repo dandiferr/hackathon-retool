@@ -14,6 +14,7 @@ type Merchant {
     website: String!
     affirmTxnFee: Float!
     integrationType: String!
+    integrationChannel: String!
     adminName: String!
     adminEmail: String!
     adminPhone: String!
@@ -32,6 +33,7 @@ input MerchantInput {
     website: String!
     affirmTxnFee: Float!
     integrationType: String!
+    integrationChannel: String!
     adminName: String!
     adminEmail: String!
     adminPhone: String!

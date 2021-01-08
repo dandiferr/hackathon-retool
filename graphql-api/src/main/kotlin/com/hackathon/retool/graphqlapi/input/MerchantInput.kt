@@ -5,6 +5,7 @@ data class MerchantInput(
     val website: String,
     val affirmTxnFee: Double,
     val integrationType: String,
+    val integrationChannel: String,
     val adminName: String,
     val adminEmail: String,
     val adminPhone: String,

@@ -19,6 +19,8 @@ class Merchant {
     var affirmTxnFee: Double? = 0.00
     @Column(name="integration_type")
     var integrationType: String? = ""
+    @Column(name="integration_channel")
+    var integrationChannel: String? = ""
     @Column(name="admin_name")
     var adminName: String? = ""
     @Column(name="admin_email")

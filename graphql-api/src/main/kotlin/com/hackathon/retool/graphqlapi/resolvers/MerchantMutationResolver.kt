@@ -23,6 +23,7 @@ class MerchantMutationResolver @Autowired constructor(val repository: MerchantsR
         merchant.website = input.website
         merchant.affirmTxnFee = input.affirmTxnFee
         merchant.integrationType = input.integrationType
+        merchant.integrationChannel = input.integrationChannel
         merchant.adminName = input.adminName
         merchant.adminEmail = input.adminEmail
         merchant.adminPhone = input.adminPhone
