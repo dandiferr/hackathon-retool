@@ -12,7 +12,7 @@ type Merchant {
     ari: String!
     merchantName: String!
     website: String!
-    affirmTxnFee: String!
+    affirmTxnFee: Float!
     integrationType: String!
     adminName: String!
     adminEmail: String!
@@ -24,4 +24,18 @@ type Merchant {
 
 type Mutation {
     createMerchant: Merchant
+    updateMerchant(ari: String, merchant: MerchantInput): Merchant
+}
+
+input MerchantInput {
+    merchantName: String!
+    website: String!
+    affirmTxnFee: Float!
+    integrationType: String!
+    adminName: String!
+    adminEmail: String!
+    adminPhone: String!
+    fraudName: String!
+    fraudEmail: String!
+    fraudPhone: String!
 }
